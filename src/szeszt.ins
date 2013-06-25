@@ -1,0 +1,11 @@
+\input docstrip.tex
+\keepsilent
+\usedir{tex/latex/szeszt}
+\preamble
+\endpreamble
+\generate{
+    \file{szeszt.sty}{\from{szeszt.dtx}{package}}
+    \file{szesztarticle.cls}{\from{szeszt.dtx}{article}}
+    \file{szesztshort.cls}{\from{szeszt.dtx}{short}}
+}
+\endbatchfile

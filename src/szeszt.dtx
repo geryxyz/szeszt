@@ -1,0 +1,239 @@
+%\iffalse meta-comment
+% Copyright (C) 2013 by Balogh Gergő
+% This file and its companion matrials are free to use for all people associated with SZESZT (Szegedi Egyetemistákat Szocializáló Társaság). All other rights are reserved.
+
+% This product is provided 'as is', means use at your on risk.
+%\fi
+
+%\iffalse
+%<article|short|package>\NeedsTeXFormat{LaTeX2e}
+%<article>\ProvidesClass{szesztarticle}
+%<short>\ProvidesClass{szesztshort}
+%<package>\ProvidesPackage{szeszt}
+%<article|short|package>[2013/18/05 v1.0tinco szeszt]
+%<article>\LoadClass{article}
+%<short>\LoadClass[11pt]{article}
+%
+%<*driver>
+\documentclass{ltxdoc}
+\usepackage{szeszt}
+\EnableCrossrefs
+\CodelineIndex
+\RecordChanges
+\begin{document}
+\DocInput{szeszt.dtx}
+\end{document}
+%</driver>
+%\fi
+%
+%\changes{v0.0tinco}{2013/18/05}{Initial version}
+%
+%\GetFileInfo{szeszt.sty}
+%
+% \title{The \textsf{szeszt} package and class boundle\thanks{This document
+% corresponds to \textsf{szeszt}~\fileversion,
+% dated~\filedate.}}
+% \author{Balogh Gerg\H{o}\\\texttt{geryxyz@gmail.com}}
+%
+% \maketitle
+%
+%    \begin{macrocode}
+%<*short|article>
+\RequirePackage{fancyhdr}
+%</short|article>
+%<*short>
+\fancypagestyle{plain}{
+    \fancyhead[L]{}
+    \fancyhead[C]{}
+    \fancyhead[R]{}
+    \fancyfoot[L]{}
+    \fancyfoot[C]{}
+    \fancyfoot[R]{}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0pt}
+}
+\fancyhead[L]{}
+\fancyhead[C]{}
+\fancyhead[R]{}
+\fancyfoot[L]{}
+\fancyfoot[C]{}
+\fancyfoot[R]{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\pagestyle{fancy}
+
+\RequirePackage{calligra}
+\RequirePackage{cantarell}
+\RequirePackage{caption}
+\captionsetup[figure]{labelformat=empty}
+\RequirePackage{booktabs}
+%</short>
+
+\RequirePackage{calc}
+\RequirePackage{geometry}
+\RequirePackage{graphicx}
+\RequirePackage{ifpdf}
+\ifpdf %if using pdfLaTeX in PDF mode
+    \DeclareGraphicsExtensions{.pdf,.png,.jpg,.jpeg,.mps}
+\else %if using LaTeX or pdfLaTeX in DVI mode
+    \DeclareGraphicsExtensions{.eps,.bmp}
+    \DeclareGraphicsRule{.emf}{bmp}{}{}% declare EMF filename extension
+    \DeclareGraphicsRule{.png}{bmp}{}{}% declare PNG filename extension
+\fi
+\RequirePackage{xcolor}
+\RequirePackage{array}
+\newsavebox{\titleright}
+%    \end{macrocode}
+%
+%\section{Page level format}
+%\begin{macro}{\bemargingood}
+%Sets the margin for two side printing. |\bemargingood|\marg{unit}\marg{binding offset}
+%    \begin{macrocode}
+%<*article|package>
+\newcommand{\bemargingood}[2]{
+    \geometry{twoside,inner=#1*2,top=#1*3,outer=#1*4,bottom=#1*5,bindingoffset=#2}
+}
+\bemargingood{1cm}{20mm}
+%</article|package>
+%<*short>
+\geometry{hmargin=2cm,top=1cm,nofoot,nohead}
+\setlength{\leftskip}{0pt plus.5fil}
+\setlength{\rightskip}{0pt plus-.5fil}
+\setlength{\parfillskip}{0pt plus1fil}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1ex}
+%</short>
+%    \end{macrocode}
+%\end{macro}
+%
+%\section{Text level format}
+%\begin{macro}{\maketitle}
+%\begin{macro}{\szesztmaketitle}
+%Simple title. Example:\\
+%\title{Title of Example}
+%\author{Balogh Gerg\H{o}}
+%\date{2013. may 18.}
+%\szesztmaketitle
+%    \begin{macrocode}
+%<*article>
+\renewcommand{\maketitle}{
+%</article>
+%<*package>
+\newcommand{\szesztmaketitle}{
+%</package>
+%<*article|package>
+    \savebox{\titleright}{
+        \parbox[b]{.5\textwidth}{
+            \raggedright
+            \textcolor{black!50!white}{\textit{\@author}}\vspace{1ex}\\
+            \textbf{\textsf{\Large\@title}}\vspace{1.5ex}\\
+            \textcolor{black!50!white}{\textit{\@date}}\\
+        }
+    }
+    \noindent
+    \parbox{\textwidth}{
+        \includegraphics[height=.3\textwidth]{res/pic/logo}
+        \rule{1pt}{.3\textwidth}
+        \raisebox{.15\textwidth-.5\ht\titleright}{\usebox{\titleright}}
+    }
+    \vspace*{.15\textwidth}
+}
+%</article|package>
+%<*short>
+\renewcommand{\maketitle}{
+    \begin{center}
+        \textit{\@author}\vspace{1ex}\\
+        {\hspace*{-2.5ex}\Huge\calligra\textcolor{black!25!white}{\@title}}\vspace{-3.5ex}\\
+        \textbf{\textsf{\LARGE\@title}}\vspace{1.5ex}\\
+        \textit{\@date}\vspace*{4ex}\\
+    \end{center}
+}
+\newcommand{\maketitlenodate}{
+    \begin{center}
+        \textit{\@author}\vspace{1ex}\\
+        {\hspace*{-2.5ex}\Huge\calligra\textcolor{black!25!white}{\@title}}\vspace{-3.5ex}\\
+        \textbf{\textsf{\LARGE\@title}}\vspace*{4ex}\\
+    \end{center}
+}
+%</short>
+%    \end{macrocode} 
+%\end{macro}
+%\end{macro}
+%\begin{macro}{\szesztdividingsection}
+%Use to create a section title which separate two distinc part of the same document. For example think of the list of founders.
+%    \begin{macrocode}
+%<*short>
+\newcommand{\szesztdividingsection}[1]{
+    \begin{center}
+        {\hspace*{-2.5ex}\huge\calligra\textcolor{black!25!white}{#1}}\vspace{-2.5ex}\\
+        \textbf{\textsf{\large{}#1}}\vspace{8ex}\\
+    \end{center}
+}
+%</short>
+%    \end{macrocode}
+%\end{macro}
+%\begin{macro}{\szesztsignum}
+%    \begin{macrocode}
+\newcommand{\szesztsignum}[2][]{
+    
+    \parbox{.3\textwidth}{
+        \begin{center}
+            \textcolor{black!25!white}{\rule{.3\textwidth}{.1pt}}\\
+            \textsf{#2}\vspace{1ex}\\
+            {\scriptsize\textcolor{black!50!white}{
+                    \begin{tabular}{>{\itshape\rule{0pt}{2.25ex}}c}
+                        #1
+                    \end{tabular}
+                }
+            }
+        \end{center}
+        \vspace*{2ex}
+    }
+}
+%    \end{macrocode}
+%\end{macro}
+%\begin{macro}{szesztsignums}
+%    \begin{macrocode}
+\newenvironment{szesztsignums}{
+    \begin{center}
+    \begin{tabular}{@{}c@{\hspace*{.15\textwidth}}c@{}}    
+}{
+    \end{tabular}
+    \end{center}
+}
+%    \end{macrocode}
+%\end{macro}
+%\begin{macro}{\szeszttableheader}
+%    \begin{macrocode}
+\newcommand{\szeszttableheader}[1]{
+    \textbf{#1}
+}
+%    \end{macrocode}
+%\end{macro}
+%\begin{macro}{\szeszthighemph}
+%    \begin{macrocode}
+\newcommand{\szeszthighemph}[1]{
+    \begin{center}
+    \textbf{\fcafamily #1}
+    \end{center}
+}
+%    \end{macrocode}
+%\end{macro}
+%\begin{macro}{\szesztdate}
+%    \begin{macrocode}
+\newcommand{\szesztdate}[1]{
+    \begin{flushright}
+        \textit{#1, \@date}
+    \end{flushright}
+}
+%    \end{macrocode}
+%\end{macro}
+%\begin{macro}{\szeszt}
+%    \begin{macrocode}
+\newcommand{\szeszt}{
+    SZESZT
+}
+%    \end{macrocode}
+%\end{macro}
+% \Finale
+\endinput
