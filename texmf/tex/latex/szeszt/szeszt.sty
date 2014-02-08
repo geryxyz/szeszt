@@ -1,0 +1,75 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{szeszt}
+[2013/18/05 v1.0tinco szeszt]
+
+\RequirePackage{calc}
+\RequirePackage{geometry}
+\RequirePackage{graphicx}
+\RequirePackage{ifpdf}
+\ifpdf %if using pdfLaTeX in PDF mode
+    \DeclareGraphicsExtensions{.pdf,.png,.jpg,.jpeg,.mps}
+\else %if using LaTeX or pdfLaTeX in DVI mode
+    \DeclareGraphicsExtensions{.eps,.bmp}
+    \DeclareGraphicsRule{.emf}{bmp}{}{}% declare EMF filename extension
+    \DeclareGraphicsRule{.png}{bmp}{}{}% declare PNG filename extension
+\fi
+\RequirePackage{xcolor}
+\newsavebox{\titleright}
+\newcommand{\bemargingood}[2]{
+    \geometry{twoside,inner=#1*2,top=#1*3,outer=#1*4,bottom=#1*5,bindingoffset=#2}
+}
+\bemargingood{1cm}{20mm}
+\newcommand{\szesztmaketitle}{
+    \savebox{\titleright}{
+        \parbox[b]{.5\textwidth}{
+            \raggedright
+            \textcolor{black!50!white}{\textit{\@author}}\vspace{1ex}\\
+            \textbf{\textsf{\Large\@title}}\vspace{1.5ex}\\
+            \textcolor{black!50!white}{\textit{\@date}}\\
+        }
+    }
+    \noindent
+    \parbox{\textwidth}{
+        \includegraphics[height=.3\textwidth]{szesztlogo}
+        \rule{1pt}{.3\textwidth}
+        \raisebox{.15\textwidth-.5\ht\titleright}{\usebox{\titleright}}
+    }
+    \vspace*{.15\textwidth}
+}
+\newcommand{\szesztsignum}[2][]{
+    \parbox{.3\textwidth}{
+        \begin{center}
+            \textcolor{black!25!white}{\rule{.3\textwidth}{.1pt}}\\
+            \textsf{#2}\\
+            \textcolor{black!25!white}{\textit{\scriptsize #1}}
+        \end{center}
+        \vspace*{2ex}
+    }
+}
+\newenvironment{szesztsignums}{
+    \begin{center}
+    \begin{tabular}{@{}c@{\hspace*{.15\textwidth}}c@{}}
+}{
+    \end{tabular}
+    \end{center}
+}
+\newcommand{\szeszttableheader}[1]{
+    \textbf{#1}
+}
+\newcommand{\szeszthighemph}[1]{
+    \begin{center}
+    \textbf{\fcafamily #1}
+    \end{center}
+}
+\newcommand{\szesztdate}[1]{
+    \begin{flushright}
+        \textit{#1, \@date}
+    \end{flushright}
+}
+\newcommand{\szeszt}{SZESZT}
+\newenvironment{szesztabstract}{
+    \sffamily\bfseries
+}{
+    \medskip\par
+}
+\endinput
